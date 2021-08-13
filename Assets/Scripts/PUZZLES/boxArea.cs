@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class boxArea : MonoBehaviour
 {
+    //public Levels levels
+    public ResolvePuzzles resolvePuzzles;
+    public bool haveAkey = false;
+    public float waitTimeToShowItem;
     public enum boxAreas
     {
-        one = 0,
-        two = 1,
-        three = 2,
-        four = 3,
+        A = 0,
+        B = 1,
+        C = 2,
+        D = 3,
+        E = 4, 
+        F = 5,
+        G = 6,
+        H = 7,
+        I = 8,
+        J = 9,
     };
 
     public boxAreas areaOrder;
@@ -18,9 +28,12 @@ public class boxArea : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //INDEX DA POSICAO DA AREA
-            print((int)this.areaOrder);
-            ResolvePuzzles.Instance.Progression((int)this.areaOrder);
+            resolvePuzzles.ReceiveBoxAreaID((int)areaOrder, 0 ,false);
+            if (haveAkey)
+            {
+                resolvePuzzles.ReceiveBoxAreaID((int)areaOrder, waitTimeToShowItem, haveAkey);
+                haveAkey = false;
+            }
         }
     }
 }

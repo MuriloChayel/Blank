@@ -16,28 +16,32 @@ public class UI_inventory : MonoBehaviour
     public void AddItemToCanvas(Item item)
     {
         Transform icon = Instantiate(slot, container.transform, false).transform;
-        slot.gameObject.SetActive(true);
-        
-        img.GetComponent<Image>().useSpriteMesh = true;
-        
-        icon.gameObject.SetActive(true);
+        icon.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+        icon.gameObject.AddComponent<iconTypes>();
+        icon.gameObject.GetComponent<iconTypes>().type = item.type;
         icons.Add(icon);
     }
     //CORRIGINDO
-    public void UseItemFromCanvas(Item.ItemType type)
+    public void UseItemFromCanvas(ItemClass.ItemType type)
     {
         switch (type)
         {
-            case Item.ItemType.chave:
+            case ItemClass.ItemType.chave:
                 for(int a = 0; a < icons.Count; a++)
                 {
-                    Destroy(icons[a].gameObject);
+                    WalkInList(a);
                 }
                 break;
-            case Item.ItemType.envelope:
+            case ItemClass.ItemType.envelope:
+
                 break;
             default:
                 return;
         }
+    }
+    public void WalkInList(int index)
+    {
+        if (icons[index].GetComponent<iconTypes>().type == ItemClass.ItemType.chave)
+            Destroy(icons[index].gameObject);
     }
 }

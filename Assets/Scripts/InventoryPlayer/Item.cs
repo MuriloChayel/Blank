@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public ItemClass.ItemType type;
     public Sprite sprite;
 
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>().sprite;    
     }
-    public enum ItemType
-    {
-        chave,
-        envelope,
-    };
-    public ItemType type;
-
+  
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

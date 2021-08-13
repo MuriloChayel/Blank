@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class InventorySetup : MonoBehaviour
 {
+    public static InventorySetup Instance { get; private set; }
     public UI_inventory uI_Inventory;
-
+    
     [SerializeField] public List<Item> itemList;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("itens"))
@@ -16,15 +21,10 @@ public class InventorySetup : MonoBehaviour
             AddItem(item);
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) 
-            UseKey(); 
-    }
     public void AddItem(Item item)
     {
         SetItemProperties(item);
-        print("tipo do item adquirido" + item.type);
+        //print("tipo do item adquirido" + item.type);
         uI_Inventory.AddItemToCanvas(item);//newItem.sprite);
     }
     public void SetItemProperties(Item itemObj)
@@ -36,19 +36,17 @@ public class InventorySetup : MonoBehaviour
     {
         for (int a = 0; a < itemList.Count; a++)
         {
-            if (itemList[a].type == Item.ItemType.chave)
+            if (itemList[a].type == ItemClass.ItemType.chave)
             {
-                uI_Inventory.UseItemFromCanvas(Item.ItemType.chave);
+                uI_Inventory.UseItemFromCanvas(ItemClass.ItemType.chave);
                 itemList.RemoveAt(a);
             }
         }
     }
     //CORRIGINDO
-    public void UseCommunItem()
+    public void UseCommunItem(int indexOfCommunItem, bool canUseThisItem)
     {
-        for(int a = 0; a < itemList.Count; a++)
-        {
-
-        }
+        if(canUseThisItem)
+            itemList.RemoveAt(indexOfCommunItem);
     }
 }
