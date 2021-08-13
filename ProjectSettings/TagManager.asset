@@ -7,6 +7,7 @@ TagManager:
   - itens
   - hideArea
   - doors
+  - walls
   layers:
   - Default
   - TransparentFX
