@@ -1,19 +1,29 @@
 # Nome da Aplicação
 
-# Equipe 
+# Equipe de Projeto I
+Membros que estão na cadeira de Projeto Integrado I
+
+- Lais Rocha
+- Oscar Vinicius
+- Isaac Santos
+- Isaac Matos
+
+# Equipe Blank []
+Todos os membros responsáveis pelo desenvolvimento do Jogo.
+
+- Thiago Pires
+- Lais Rocha
+- Murilo Chayel
+- Oscar Vinicius
+- Isaac Santos
+- Isaac Matos
 
 # Instalar ou executar a aplicação
-## Instalar a Unity
-## Como compilar o código de vocês
-## Executável
-[fulano.exe](http://github.com/MuriloChayel/Blank/bin/fulano.exe)
+[blank.exe](http://github.com/MuriloChayel/Blank/bin/fulano.exe)
 
-# Funcionalidades
-| Requisitos                    | Descrição                                                                                                                                               | Função ou Classe | Arquivo   | Status   |
-|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|-----------|----------|
-| RF0003: Movimentar personagem | Como usuário, posso guiar a personagem por qualquer direção acessível, podendo explorar o cenário para que encontre os itens necessários para progredir | playerBehavior   | player.cs | Completa |
-|                               |                                                                                                                                                         | fulano           | fulano.cs |          |
-|                               |                                                                                                                                                         |                  |           |          |
+## Instalar a Unity
+Unity Hub 2.4.2 https://unity3d.com/pt/get-unity/download
+Unity 2020.3.7f1
 
 # Funcionalidades
 
@@ -139,5 +149,11 @@
    </td>
   </tr>
 </table>
+
+# Créditos
+
+- Daniel Portela
+- João Pedro dos Santos
+
 
 # Blank
