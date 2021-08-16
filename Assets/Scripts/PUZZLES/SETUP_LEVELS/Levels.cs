@@ -2,29 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Levels : MonoBehaviour
+[CreateAssetMenu(menuName = "Levels/level")]
+public class Levels : ScriptableObject
 {
-    public Level_01 level_01;
-    public Transform[] levels;
+    [Header("STEPS")]
+    public int stepCount;
+    public bool[] steps;
 
-
-    public int levelCount;
-
-
-    public void Start()
+    [Header("COMPLETE")]
+    public bool stepComplete;
+    
+    [Header("AUDIOS")]
+    public SequencialClips clips;
+    
+    public void StartLevel()
     {
-        level_01.StartLevel();
-        levelCount = InitLevelTransformList();
-    }
-    private int InitLevelTransformList()
-    {
-        int count = transform.childCount;
-        levels = new Transform[count];
-
-        for (int a = 0; a < count; a++)
+        stepComplete = false;
+        steps = new bool[stepCount];
+        for(int a = 0; a < stepCount; a++)
         {
-            levels[a] = transform.GetChild(a);
+            steps[a] = new bool();
         }
-        return count;
+    }
+    public void CompleteStep(int id)
+    {
+        if (id == 0)
+        {
+            steps[0] = true;
+        }
+        else
+        {
+            if (steps[id - 1])
+                steps[id] = true;
+        }
+        stepComplete = CompleteLevel();
+    }
+    public bool CompleteLevel()
+    {
+        for(int a = 0; a < steps.Length; a++)
+        {
+            if (steps[a] == true)
+                continue;
+            else
+                return false;
+        }
+        return true;
+    }
+    
+    public void SpawnItem(int id, GameObject item, Vector2 position)
+    {
+        Instantiate(item, position, Quaternion.identity);
+        CompleteStep(id);
+    }
+    public void NarratorPlaySequentialAudios()
+    {
+        clips.PlayInOrder(Narrator.Instance.voicePlayer);
+        Debug.Log("NARRADOR INICIADO");
     }
 }

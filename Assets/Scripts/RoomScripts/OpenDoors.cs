@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +10,26 @@ public class OpenDoors : MonoBehaviour
     public InventorySetup inventorySetup;
 
     public KeyCode openDoorKey;
+
     [Header("PROPERTIES")]
     public GameObject door;
     public BoxCollider2D doorCollider;
+    
     [Header("CHECKs")]
     public bool levelComplete;
     public bool haveAKey = false;
     public bool inDoorArea = false;
-   
+
+    [Header("DOOR PROPERTIES")]
+    public bool frontDoor;
+    public GameObject openDoor, closeDoor;
+    public BoxCollider2D frontDoorCollider;
     private void Start()
     {
         Instance = this;
-        door.SetActive(false);
+        if(!frontDoor)
+            door.SetActive(false);
+
     }
     //ABRIR A PORTA + USAR CHAVE
     private void Update()
@@ -38,7 +47,6 @@ public class OpenDoors : MonoBehaviour
         {
             foreach (var item in inventorySetup.itemList)
             {
-                print("Key");
                 if (item.type == ItemClass.ItemType.chave)
                     haveAKey = true;
             }
@@ -46,8 +54,18 @@ public class OpenDoors : MonoBehaviour
     }
     // OPEN DOOR
     private void OpenDoor()
-    {   door.SetActive(true);
-        doorCollider.enabled = false;
+    {
+        if (!frontDoor)
+        {
+            door.SetActive(true);
+            doorCollider.enabled = false;
+        }
+        else
+        {
+            closeDoor.SetActive(false);
+            openDoor.SetActive(true);
+            frontDoorCollider.enabled = false;
+        }
     }
     //CHECAGEM ABRIR PORTA - NA AREA DA PORTA --
     private void OnTriggerEnter2D(Collider2D collision)

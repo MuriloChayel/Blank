@@ -8,6 +8,9 @@ TagManager:
   - hideArea
   - doors
   - walls
+  - rooms
+  - areas
+  - lights
   layers:
   - Default
   - TransparentFX

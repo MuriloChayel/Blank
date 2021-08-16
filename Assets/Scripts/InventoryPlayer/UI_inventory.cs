@@ -42,6 +42,9 @@ public class UI_inventory : MonoBehaviour
     public void WalkInList(int index)
     {
         if (icons[index].GetComponent<iconTypes>().type == ItemClass.ItemType.chave)
+        {
             Destroy(icons[index].gameObject);
+            icons.RemoveAt(index);
+        }
     }
 }
